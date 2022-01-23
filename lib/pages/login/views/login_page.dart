@@ -78,20 +78,21 @@ class LoginPage extends GetView<LoginController> {
 
   Widget _login() => SizedBox(
         width: double.infinity,
-        child: ElevatedButton(
-          key: const ValueKey('login'),
-          onPressed: controller.onLogin,
-          child: Obx(() => controller.isLoadingLogin.value
-              ? const SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                    strokeWidth: 1,
-                  ),
-                )
-              : const Text('Login')),
-        ),
+        child: Obx(() => ElevatedButton(
+              key: const ValueKey('login'),
+              onPressed:
+                  controller.isLoadingLogin.value ? null : controller.onLogin,
+              child: controller.isLoadingLogin.value
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 1,
+                      ),
+                    )
+                  : const Text('Login'),
+            )),
       );
 
   FormFieldValidator<String>? _emptyValidator(String field) =>
