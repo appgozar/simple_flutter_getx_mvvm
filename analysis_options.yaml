@@ -1,0 +1,13 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  plugins:
+    - dart_code_metrics
+  strong-mode:
+    implicit-casts: true
+  language:
+    strict-raw-types: true
+  exclude:
+    # Ignore generated files
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
