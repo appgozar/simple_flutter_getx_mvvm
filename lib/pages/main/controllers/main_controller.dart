@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
+import 'package:simple_flutter_mvvm/pages/main/repositories/base_main_repository.dart';
 
 import '../../profile/views/profile_page.dart';
 import '../../shared/models/api_response.dart';
 import '../models/user_model.dart';
-import '../repositories/main_repository.dart';
 
 class MainController extends GetxController {
-  final _repository = MainRepository();
+  late final BaseMainRepository _repository = Get.find<BaseMainRepository>();
   late final List<UserModel> cachedUsers;
 
   final Rx<ApiResponse<List<UserModel>>> usersResponse =
@@ -25,11 +25,13 @@ class MainController extends GetxController {
   }
 
   void onAvatarTapped() {
-    Get.toNamed(ProfilePage.routeName, arguments: ownerUserModel);
+    Get.toNamed('${ProfilePage.routeName}/${ownerUserModel.guid}',
+        arguments: ownerUserModel);
   }
 
   void onUserTapped(UserModel userModel) {
-    Get.toNamed(ProfilePage.routeName, arguments: userModel);
+    Get.toNamed('${ProfilePage.routeName}/${userModel.guid}',
+        arguments: userModel);
   }
 
   UserModel get ownerUserModel => cachedUsers.firstWhere((e) => e.isOwner);

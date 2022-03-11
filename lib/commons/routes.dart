@@ -22,7 +22,7 @@ class Routes {
           binding: MainBinding(),
         ),
         GetPage(
-          name: ProfilePage.routeName,
+          name: ProfilePage.routeNameWithParam,
           page: ProfilePage.new,
           binding: ProfileBinding(),
         ),

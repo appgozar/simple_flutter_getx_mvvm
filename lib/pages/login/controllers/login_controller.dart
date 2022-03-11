@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import '../../../commons/view_utils.dart';
 import '../../main/views/main_page.dart';
 import '../../shared/exceptions/server_exception.dart';
-import '../repositories/login_repository.dart';
+import '../repositories/base_login_repository.dart';
 
 class LoginController extends GetxController {
-  final _repository = LoginRepository();
+  late final _repository = Get.find<BaseLoginRepository>();
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();

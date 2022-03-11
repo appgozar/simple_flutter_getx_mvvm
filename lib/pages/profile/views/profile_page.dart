@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 import '../../../commons/size_constant.dart';
 import '../../../commons/style_data.dart';
@@ -10,6 +9,7 @@ import '../controllers/profile_controller.dart';
 
 class ProfilePage extends GetView<ProfileController> {
   static const routeName = '/profile';
+  static const routeNameWithParam = '$routeName/:guid';
 
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -74,11 +74,6 @@ class ProfilePage extends GetView<ProfileController> {
   Widget _ageAndRegister() => Row(
         children: [
           Expanded(child: Text('age:      ${controller.model.age}')),
-          Expanded(
-              child: Text(
-            'registered: $_formattedRegisterDate',
-            overflow: TextOverflow.clip,
-          )),
         ],
       );
 
@@ -148,20 +143,6 @@ class ProfilePage extends GetView<ProfileController> {
           ),
         ),
       );
-
-  String get _formattedRegisterDate {
-    final dateAndZone = controller.model.registered.split(' ');
-    final String date = '${dateAndZone[0]}Z';
-    final String? zone = dateAndZone.length == 2 ? dateAndZone[1] : null;
-    final DateFormat formatter = DateFormat('hh:mm a');
-    DateTime dateTime = DateTime.parse(date);
-    if (zone != null) {
-      final timeZone = zone.split(':');
-      final timeZoneDiff = int.parse(timeZone[0]) * 60 + int.parse(timeZone[1]);
-      dateTime = dateTime.add(Duration(minutes: timeZoneDiff));
-    }
-    return formatter.format(dateTime.toLocal());
-  }
 
   @override
   String? get tag => (Get.arguments as UserModel).guid;

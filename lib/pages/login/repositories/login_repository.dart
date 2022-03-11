@@ -1,6 +1,8 @@
 import '../../shared/exceptions/server_exception.dart';
+import 'base_login_repository.dart';
 
-class LoginRepository {
+class LoginRepository extends BaseLoginRepository {
+  @override
   Future<String> login({
     required String username,
     required String password,

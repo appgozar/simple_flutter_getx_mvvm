@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:simple_flutter_mvvm/pages/profile/bindings/profile_binding.dart';
 
 import '../../../commons/view_utils.dart';
 import '../../main/controllers/main_controller.dart';
@@ -21,10 +20,9 @@ class ProfileController extends GetxController {
     if (index == -1) {
       ViewUtils.showErrorToast('User not found');
     } else {
-      Get.to(
-        ProfilePage.new,
+      Get.toNamed(
+        '${ProfilePage.routeName}/${users[index].guid}',
         arguments: users[index],
-        binding: ProfileBinding(),
       );
     }
   }
